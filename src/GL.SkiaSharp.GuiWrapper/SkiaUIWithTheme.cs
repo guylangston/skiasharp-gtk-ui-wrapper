@@ -1,3 +1,4 @@
+using System.Reflection;
 using Gtk;
 using SkiaSharp;
 
@@ -7,13 +8,13 @@ public interface ITheme
 {
     SKFont DefaultFont { get; }
     SKFont GetFont(string name, int size);
-    SKPaint GetPaint(string name);
+    SKPaint GetPaint(string name, SKPaint? defaultIfNotFound = null);
 }
 
-public abstract class SkiaUIWithTheme : SkiaUI
+public abstract class SkiaUIWithTheme : SkiaUIBase
 {
     ITheme? theme = null;
-    protected ITheme Theme => theme ?? throw new Exception("Call InitWindow before using Theme");
+    public ITheme Theme => theme ?? throw new Exception("Call InitWindow before using Theme");
 
     protected override Window InitWindow()
     {
@@ -30,7 +31,12 @@ public class SkiaUITheme : ITheme
     Dictionary<string, SKFont> fonts = new();
     Dictionary<string, SKPaint> paints = new();
 
-    public SKFont? DefaultFont { get; set; }
+    public SkiaUITheme(string defFont, int defSize)
+    {
+        DefaultFont = GetFont(defFont, defSize);
+    }
+
+    public SKFont DefaultFont { get; set;}
 
     public SKFont GetFont(string name, int size)
     {
@@ -39,20 +45,23 @@ public class SkiaUITheme : ITheme
         return fonts[key] = new SKFont(SKTypeface.FromFamilyName(name), size);
     }
 
-    public SKPaint GetPaint(string name)
+    public SKPaint GetPaint(string name, SKPaint? defaultIfNotFound = null)
     {
         if (paints.TryGetValue(name, out var hit)) return hit;
 
-        // if (Enum.TryParse<SKColors>(name, out var clr))
-        // {
-        //     return SetPaint(name, new SKPaint { Color = SKColors.21:08
-        // }
+        var type = typeof(SKColors);
+        foreach(var item in type.GetFields(BindingFlags.Public | BindingFlags.Static))
+        {
+            if (item.Name == name)
+            {
+                return SetPaint(name, new SKPaint { Color = (SKColor)item.GetValue(null) } );
+            }
+        }
+        throw new KeyNotFoundException(name);
     }
 
-    public void SetPaint(string name, SKPaint paint)
-    {
-        paints[name] = paint;
-    }
+
+    public SKPaint SetPaint(string name, SKPaint paint) => paints[name] = paint;
 }
 
 
