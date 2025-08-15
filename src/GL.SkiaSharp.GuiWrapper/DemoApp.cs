@@ -53,7 +53,7 @@ public class DemoApp : SkiaUI
             public float dX { get; set; }
             public float dY { get; set; }
             public float Size { get; set; }
-            public SKPaint Clr { get; set; }
+            public SKPaint Clr { get; set; } = new();
 
             public void Step(SKRect size)
             {
@@ -63,9 +63,9 @@ public class DemoApp : SkiaUI
                 if (Y < 0) { Y = 1; dY *= -1; }
                 if (X >= size.Width) { X = size.Width-1; dX *= -1; }
                 if (Y >= size.Height) { Y = size.Height-1; dY *= -1; }
-
             }
         }
+
 
         public override void DrawFrame(SKSurface surface, SKCanvas canvas, int x, int y)
         {
@@ -95,7 +95,6 @@ public class DemoApp : SkiaUI
                 ball.Step(size);
                 canvas.DrawCircle(ball.X, ball.Y, ball.Size, ball.Clr);
             }
-
         }
     }
 

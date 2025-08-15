@@ -29,6 +29,11 @@ public abstract  class SkiaUI : SkiaUIWithTheme
         if (Scene != null) Scene.HandleKeyPress(evt);
     }
 
+    protected override void Step()
+    {
+        if (Scene != null) Scene.Step();
+    }
+
     protected override Window InitWindow()
     {
         var init = base.InitWindow();
