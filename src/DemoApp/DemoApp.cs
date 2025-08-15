@@ -1,8 +1,9 @@
 using Gdk;
 using Gtk;
 using SkiaSharp;
+using GL.SkiaSharp.GuiWrapper;
 
-namespace GL.SkiaSharp.GuiWrapper;
+namespace DemoApp;
 
 public class DemoApp : SkiaUI
 {

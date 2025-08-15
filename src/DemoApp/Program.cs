@@ -1,4 +1,6 @@
-﻿namespace GL.SkiaSharp.GuiWrapper;
+﻿using GL.SkiaSharp.GuiWrapper;
+
+namespace DemoApp;
 
 public static class Program
 {
