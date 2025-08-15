@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace GL.SkiaSharp.GuiWrapper;
 
-public abstract  class SkiaUI : SkiaUIWithTheme
+public abstract class SkiaUI : SkiaUIWithTheme
 {
     public IUIElement? Scene { get; set; }
 

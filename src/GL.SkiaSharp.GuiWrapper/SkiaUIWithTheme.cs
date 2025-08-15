@@ -54,7 +54,8 @@ public class SkiaUITheme : ITheme
         {
             if (item.Name == name)
             {
-                return SetPaint(name, new SKPaint { Color = (SKColor)item.GetValue(null) } );
+                var val = item.GetValue(null) ?? throw new NullReferenceException();
+                return SetPaint(name, new SKPaint { Color = (SKColor)val} );
             }
         }
         throw new KeyNotFoundException(name);
