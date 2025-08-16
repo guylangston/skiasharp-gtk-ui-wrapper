@@ -5,9 +5,9 @@ using GL.SkiaSharp.GuiWrapper;
 
 namespace DemoApp;
 
-public class DemoApp : SkiaUI
+public class DemoApp : SkiaUI<SkiaUITheme>
 {
-    protected override ITheme ThemeFactory()
+    protected override SkiaUITheme ThemeFactory()
     {
         var theme = new SkiaUITheme("Roboto", 20);
         return theme;

@@ -3,7 +3,7 @@ using GL.SkiaSharp.GuiWrapper;
 
 namespace DemoApp;
 
-class SceneBounce : UIElementBase<DemoApp>
+class SceneBounce : UIElementBase<DemoApp, SkiaUITheme>
 {
     List<Ball> balls = new();
 
@@ -31,7 +31,6 @@ class SceneBounce : UIElementBase<DemoApp>
         }
     }
 
-
     public override void DrawFrame(SKSurface surface, SKCanvas canvas, int x, int y)
     {
         var size = canvas.LocalClipBounds;
@@ -44,14 +43,14 @@ class SceneBounce : UIElementBase<DemoApp>
             for(int cc=0; cc<100; cc++)
             {
                 balls.Add(new Ball()
-                        {
-                        X = r.Next(0, (int)size.Width),
-                        Y = r.Next(0, (int)size.Height),
-                        dX = r.Next(-5, 5),
-                        dY = r.Next(-5, 5),
-                        Size = r.Next(3, 10),
-                        Clr = SampleClr()
-                        });
+                {
+                    X = r.Next(0, (int)size.Width),
+                    Y = r.Next(0, (int)size.Height),
+                    dX = r.Next(-5, 5),
+                    dY = r.Next(-5, 5),
+                    Size = r.Next(3, 10),
+                    Clr = SampleClr()
+                });
             }
         }
 
@@ -62,5 +61,4 @@ class SceneBounce : UIElementBase<DemoApp>
         }
     }
 }
-
 

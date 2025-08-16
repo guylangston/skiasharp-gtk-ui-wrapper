@@ -3,7 +3,7 @@ using GL.SkiaSharp.GuiWrapper;
 
 namespace DemoApp;
 
-class Scene1 : UIElementBase<DemoApp>
+class Scene1 : UIElementBase<DemoApp, SkiaUITheme>
 {
     public Scene1(DemoApp app) : base(app) { }
 

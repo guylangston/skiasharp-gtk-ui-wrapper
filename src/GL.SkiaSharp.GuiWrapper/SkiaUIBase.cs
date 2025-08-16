@@ -9,7 +9,7 @@ public abstract class SkiaUIBase : IUIElement
     public int Frame { get; set; }
     public Window? Window { get; private set; }
     public int ExitCode { get; set; } = 0;
-    public string Title { get; set; } = nameof(SkiaUI);
+    public string Title { get; set; } = "untitled";
     public (int x, int y) RequestedWindowSize { get; set; } = (400, 300);
 
     [GLib.ConnectBefore]

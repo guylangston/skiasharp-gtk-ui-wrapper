@@ -3,7 +3,8 @@ using SkiaSharp;
 
 namespace GL.SkiaSharp.GuiWrapper;
 
-public abstract class SkiaUI : SkiaUIWithTheme
+/// <summary>Use generics so that the theme can have well-known/strongly types properties on top of GetPaint(name)</summary>
+public abstract class SkiaUI<TTheme> : SkiaUIWithTheme<TTheme> where TTheme: ITheme
 {
     public IUIElement? Scene { get; set; }
 

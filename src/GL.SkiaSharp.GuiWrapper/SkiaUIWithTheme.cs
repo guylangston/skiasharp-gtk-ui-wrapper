@@ -11,10 +11,10 @@ public interface ITheme
     SKPaint GetPaint(string name, SKPaint? defaultIfNotFound = null);
 }
 
-public abstract class SkiaUIWithTheme : SkiaUIBase
+public abstract class SkiaUIWithTheme<TTheme> : SkiaUIBase where TTheme:ITheme
 {
-    ITheme? theme = null;
-    public ITheme Theme => theme ?? throw new Exception("Call InitWindow before using Theme");
+    TTheme? theme = default;
+    public TTheme Theme => theme ?? throw new Exception("Call InitWindow before using Theme");
 
     protected override Window InitWindow()
     {
@@ -23,7 +23,7 @@ public abstract class SkiaUIWithTheme : SkiaUIBase
         return init;
     }
 
-    protected abstract ITheme ThemeFactory();
+    protected abstract TTheme ThemeFactory();
 }
 
 public class SkiaUITheme : ITheme
@@ -61,8 +61,6 @@ public class SkiaUITheme : ITheme
         throw new KeyNotFoundException(name);
     }
 
-
     public SKPaint SetPaint(string name, SKPaint paint) => paints[name] = paint;
 }
-
 

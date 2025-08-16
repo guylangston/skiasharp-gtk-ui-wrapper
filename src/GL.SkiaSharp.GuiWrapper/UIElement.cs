@@ -13,15 +13,12 @@ public interface IUIElement
 
 public interface IUICommand {}
 
-public abstract class UIElementBase<T> : IUIElement where T:SkiaUIWithTheme
+public abstract class UIElementBase<TApp, TTheme> : IUIElement where TApp:SkiaUIWithTheme<TTheme> where TTheme:ITheme
 {
-    protected UIElementBase(T app)
-    {
-        App = app;
-    }
+    protected UIElementBase(TApp app) { App = app; }
 
-    protected T App { get; }
-    protected ITheme Theme => App.Theme;
+    protected TApp App { get; }
+    protected TTheme Theme => App.Theme;
     protected Gtk.Window? Window => App.Window;
     protected int Frame => App.Frame;
 
